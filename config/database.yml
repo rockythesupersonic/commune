@@ -16,7 +16,6 @@ default: &default
   username: root
   password:
   host: localhost
-  socket: /var/lib/mysql/mysql.sock
 
 development:
   <<: *default
@@ -50,6 +49,9 @@ test:
 #
 production:
   <<: *default
-  database: commune_production
-  username: commune
-  password: <%= ENV['COMMUNE_DATABASE_PASSWORD'] %>
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
+  socket: /var/lib/mysql/mysql.sock
